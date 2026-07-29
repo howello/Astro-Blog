@@ -22,8 +22,6 @@ pnpm-debug.log*
 test/
 /public/vh-search.json
 # Tencent Cloud EdgeOne
-.env
 .edgeone
 .edgeone/*
 .tef_dist/*
-  
