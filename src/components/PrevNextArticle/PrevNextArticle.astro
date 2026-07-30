@@ -1,9 +1,12 @@
 ---
 const { prev, next } = Astro.props;
 import "./PrevNextArticle.less";
+// 文章页产物是 /article/<id>/ 目录形式，必须用绝对路径；裸 id 会被当成相对路径拼在当前文章后面
+// '#' 是 getPrevNextPosts 里「没有啦~」占位项的 id，不参与拼接
+const getHref = (id: string) => (id === "#" ? "#" : `/article/${id}`);
 ---
 
 <section class="vh-otarticle">
-	<a class="art-item" style={`background-image: url('${prev.cover}')`} href={prev.id}><span class="vh-ellipsis line-2">{prev.title}</span></a>
-	<a class="art-item" style={`background-image: url('${next.cover}')`} href={next.id}><span class="vh-ellipsis line-2">{next.title}</span></a>
+	<a class="art-item" style={`background-image: url('${prev.cover}')`} href={getHref(prev.id)}><span class="vh-ellipsis line-2">{prev.title}</span></a>
+	<a class="art-item" style={`background-image: url('${next.cover}')`} href={getHref(next.id)}><span class="vh-ellipsis line-2">{next.title}</span></a>
 </section>
