@@ -8,20 +8,41 @@ export default {
   // 网站描述
   Description: '王艳涛博客 记录 Java 后端、Vue 前端与 DevOps 实践中的经验总结与踩坑记录，涵盖 Spring Boot、TypeScript、Docker、Linux 等领域，同时也分享一些生活随笔。',
   // 网站作者
-  Author: '.𝙃owe',
+  Author: '.𝙃𝙤𝙬𝙚',
   // 作者头像
   Avatar: 'https://q1.qlogo.cn/g?b=qq&nk=1669937522&s=640',
   // 网站座右铭
-  Motto: '运气是计划之外的东西.',
+  Motto: '保持努力，保持进步。',
   // Cover 网站缩略图
   Cover: '/assets/images/banner/072c12ec85d2d3b5.webp',
   // 网站侧边栏公告 (不填写即不开启)
-  // Tips: '<p>欢迎光临我的博客 🎉</p><p>这里会分享我的日常和学习中的收集、整理及总结，希望能对你有所帮助:) 💖</p>',
+  Tips: '<p>欢迎光临我的博客 🎉</p><p>这里会分享我的日常和学习中的收集、整理及总结，希望能对你有所帮助:) 💖</p>',
   // 首页打字机文案列表
+  // 这是永远的兜底来源：首屏立即可用，一言拿不到时也由它继续轮播。
+  // 留空数组 = 不要这块文案，此时 .desc 元素直接移除，也不会去请求一言
   TypeWriteList: [
     '保持努力，保持进步。',
     'Keep moving forward—small steps, steady heart, lasting change.'
   ],
+  // 首页打字机的「一言」动态文案
+  // ------------------------------------------------------------------
+  // 在上面的本地列表之外，运行时异步拉取一言，取到才播、取不到用户无感。
+  // 播放规则见 src/scripts/TypeWrite.ts：结果先进候场队列，只在当前句
+  // 完整删除归零的那一刻才切换，绝不打断正在打字/删除的句子。
+  // ------------------------------------------------------------------
+  TypeWriteHitokoto: {
+    // 接口地址。必须返回「纯文本单句」，所以 encode 要用 text（不是 json）。
+    // 留空字符串即关闭一言，只轮播上面的本地列表。
+    // 跨域生效的前提是该接口返回 Access-Control-Allow-Origin
+    api: 'https://hitokoto.wyantao.com/?c=a&c=b&c=c&c=d&c=h&c=i&c=j&c=k&encode=text&charset=utf-8&min_length=8&max_length=20',
+    // 单次请求超时（毫秒）。超时即放弃这一句，不重试——下一轮切句会自然再发一个
+    timeout: 5000,
+    // 候场队列上限。「边播边预取」正常只会攒 1 句，留 2 是给「请求比播放快」的余量
+    bufferMax: 2,
+    // 单句最大长度（字符）。接口侧已有 max_length，这里再兜一道：
+    // 网络劫持或错误页会返回一大坨 HTML，靠长度把它挡在外面
+    maxLength: 60,
+  },
   // 网站创建时间
   CreateTime: '2026-07-01',
   // 顶部 Banner 配置
@@ -151,7 +172,7 @@ export default {
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
     // 建议使用 https://tabler.io/icons 直接下载 SVG
     // 示例：{ text: 'Github', link: 'https://github.com/<你的用户名>', icon: 'WebSite_github' },
-      { text: 'Github', link: 'https://github.com/howello', icon: 'WebSite_github' }
+    //   { text: 'Github', link: 'https://github.com/howello', icon: 'WebSite_github' }
   ],
   // 侧边栏展示
   AsideShow: {
@@ -184,8 +205,8 @@ export default {
     },
     // Waline 评论
     Waline: {
-      enable: false,
-      serverURL: ''
+      enable: true,
+      serverURL: 'https://waline.wyantao.com/'
     }
   },
   // Han Analytics 统计（https://github.com/uxiaohan/HanAnalytics）
