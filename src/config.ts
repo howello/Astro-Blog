@@ -190,7 +190,10 @@ export default {
     // i0.wp.com 供 demo 文章的图片使用，清掉 demo 文章后可一并移除
     'https://i0.wp.com',
     // registry.npmmirror.com 供视频播放器 (DPlayer/hls.js) 与评论表情按需加载使用，勿删
-    'https://registry.npmmirror.com'
+    'https://registry.npmmirror.com',
+    // Waline 评论服务端：文章页与留言页在首屏之后都会立刻请求它，提前握手省一次 TLS
+    // 改动下方 Comment.Waline.serverURL 时记得同步这里
+    'https://waline.wyantao.com'
   ],
   // 博客音乐组件解析接口
   // 注意：这是主题作者的私有接口，仅供 markdown 里的 ::music 组件使用，随时可能失效。
@@ -206,7 +209,24 @@ export default {
     // Waline 评论
     Waline: {
       enable: true,
-      serverURL: 'https://waline.wyantao.com/'
+      serverURL: 'https://waline.wyantao.com/',
+      // 发表评论前的必填项，可选 'nick'(昵称) / 'mail'(邮箱) / 'link'(网址)
+      // 留空数组 = 三项全部选填
+      requiredMeta: ['nick', 'mail'],
+      // 评论区图片上传
+      // ------------------------------------------------------------------
+      // uploadURL 留空 = 关闭评论区图片上传，当前即此状态（上传服务尚未部署）。
+      // R2 不接受浏览器直接 POST，需要一个绑定 R2 bucket 的 Cloudflare Worker 来接收。
+      // 该 Worker 需满足前端约定：接收 multipart POST（文件字段名 file），
+      // 返回 JSON { data: { link } }。link 给完整 URL 或桶内相对 key 均可，
+      // 给相对 key 时前端自动拼上下面的 publicPrefix。
+      // ------------------------------------------------------------------
+      ImageUpload: {
+        // 上传端点
+        uploadURL: '',
+        // 图片公开读取地址前缀（Cloudflare R2 自定义域）
+        publicPrefix: 'https://img.wyantao.com/img'
+      }
     }
   },
   // Han Analytics 统计（https://github.com/uxiaohan/HanAnalytics）

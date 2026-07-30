@@ -21,7 +21,9 @@ import "@/styles/ArticleBase.less";
 			<p>{frontmatter.desc}</p>
 		</header>
 		<main><slot /></main>
-		<main class={`${frontmatter.type}-main main`}><section class="vh-space-loading"><span></span><span></span><span></span></section></main>
+		{/* 供运行时异步填充的容器：links / friends / talking 各有对应的 init 脚本，
+		    message 页的内容就是上面 slot 里的静态 markdown，不需要这个容器 */}
+		{frontmatter.type !== "message" && <main class={`${frontmatter.type}-main main`}><section class="vh-space-loading"><span></span><span></span><span></span></section></main>}
 		{checkComment() && frontmatter.comment != false && <Comment />}
 	</section>
 </Layout>
