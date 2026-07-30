@@ -159,7 +159,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220607152757209](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206071527358.png)
+![image-20220607152757209](https://img.wyantao.com/img/202206071527358.png)
 
 就感觉很牛逼，啥都没干，突然就啥都有了。
 
@@ -289,7 +289,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220607155452283](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206071554407.png)
+![image-20220607155452283](https://img.wyantao.com/img/202206071554407.png)
 
 ## 组合模式实现（安全）
 
@@ -404,7 +404,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220607160001822](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206071600968.png)
+![image-20220607160001822](https://img.wyantao.com/img/202206071600968.png)
 
 ## 总结
 

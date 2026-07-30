@@ -19,7 +19,7 @@ updated: 2026-07-29
 >
 > 外观模式是迪米特法则的一种具体实现，通过引入一个新的外观角色可以降低原有系统的复杂度，同时降低客户类与子系统的耦合度。
 
-![image-20220614165339630](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206141653713.png)
+![image-20220614165339630](https://img.wyantao.com/img/202206141653713.png)
 
 ## 外观模式包含如下两个角色
 
@@ -74,7 +74,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220614170259636](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206141702741.png)
+![image-20220614170259636](https://img.wyantao.com/img/202206141702741.png)
 
 ## 加入抽象类
 
@@ -107,7 +107,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220614170854514](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206141708695.png)
+![image-20220614170854514](https://img.wyantao.com/img/202206141708695.png)
 
 ## 总结
 

@@ -169,7 +169,7 @@ public class IoDHSingleton {
 
 ## 枚举实现单例模式
 
-![image-20220601142746774](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206011427392.png)
+![image-20220601142746774](https://img.wyantao.com/img/202206011427392.png)
 
 大佬都这么说了。最完美好吧。无懈可击，起码我想不到什么能干掉这个。简单、搞笑、优美。
 
@@ -206,7 +206,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220601143744952](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206011437040.png)
+![image-20220601143744952](https://img.wyantao.com/img/202206011437040.png)
 
 结果显而易见，序列化通过，反射直接报错。
 

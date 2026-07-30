@@ -142,7 +142,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220615153127686](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206151531900.png)
+![image-20220615153127686](https://img.wyantao.com/img/202206151531900.png)
 
 ## 带外部状态的解决方案
 
@@ -196,7 +196,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220615154043570](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206151544594.png)
+![image-20220615154043570](https://img.wyantao.com/img/202206151544594.png)
 
 ## 单纯享元模式和复合享元模式
 

@@ -14,7 +14,7 @@ updated: 2026-07-29
 
 如何同时提高一个软件系统的可维护性和可复用性，是面向对象设计需要解决的核心问题之一。
 
-![image-20220530154111051](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205301541155.png)
+![image-20220530154111051](https://img.wyantao.com/img/202205301541155.png)
 
 ## 单一职责原则
 

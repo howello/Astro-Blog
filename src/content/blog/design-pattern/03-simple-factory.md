@@ -106,7 +106,7 @@ public static void main(String[] args) {
 
 6. 测试结果
 
-![image-20220531105358764](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205311053908.png)
+![image-20220531105358764](https://img.wyantao.com/img/202205311053908.png)
 
 ## 总结
 

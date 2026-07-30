@@ -140,7 +140,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220606170411143](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061704212.png)
+![image-20220606170411143](https://img.wyantao.com/img/202206061704212.png)
 
 5. 小总结
 
@@ -193,7 +193,7 @@ System.out.println("add2 = " + add2);
 System.out.println("sub2 = " + sub2);
 ```
 
-![image-20220606173327129](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061733242.png)
+![image-20220606173327129](https://img.wyantao.com/img/202206061733242.png)
 
 ## 双向适配器
 
@@ -274,7 +274,7 @@ System.out.println("add3 = " + add3);
 System.out.println("sub3 = " + sub3);
 ```
 
-![image-20220606174846152](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061748255.png)
+![image-20220606174846152](https://img.wyantao.com/img/202206061748255.png)
 
 ## 总结
 

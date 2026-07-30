@@ -171,7 +171,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220531155559461](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205311555599.png)
+![image-20220531155559461](https://img.wyantao.com/img/202205311555599.png)
 
 ### 添加一个工厂
 
@@ -223,7 +223,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220531160042668](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205311600780.png)
+![image-20220531160042668](https://img.wyantao.com/img/202205311600780.png)
 
 4. 小结
 
@@ -345,7 +345,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220531160828978](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205311608171.png)
+![image-20220531160828978](https://img.wyantao.com/img/202205311608171.png)
 
 5. 小结
 

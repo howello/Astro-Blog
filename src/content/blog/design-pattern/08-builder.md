@@ -206,7 +206,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220606152203988](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061522196.png)
+![image-20220606152203988](https://img.wyantao.com/img/202206061522196.png)
 
 ## 优缺点
 

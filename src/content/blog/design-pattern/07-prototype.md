@@ -57,7 +57,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220606100600698](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061006033.png)
+![image-20220606100600698](https://img.wyantao.com/img/202206061006033.png)
 
 ## 深浅克隆
 
@@ -118,7 +118,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220606101602868](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061016052.png)
+![image-20220606101602868](https://img.wyantao.com/img/202206061016052.png)
 
 可见，浅克隆的对象里面的对象在内存中是同一个。
 
@@ -195,7 +195,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220606104328115](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061043479.png)
+![image-20220606104328115](https://img.wyantao.com/img/202206061043479.png)
 
 从结果可以看出，深拷贝之后，即使是引用类型也在内存中拷贝了一份，内存地址不用。
 
@@ -272,7 +272,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220606112951359](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206061129453.png)
+![image-20220606112951359](https://img.wyantao.com/img/202206061129453.png)
 
 这样的话如果添加一个新的实现类，直接添加接可以。不用修改代码。
 

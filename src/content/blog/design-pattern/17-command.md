@@ -101,13 +101,13 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220629152220104](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206291522261.png)
+![image-20220629152220104](https://img.wyantao.com/img/202206291522261.png)
 
 ## 实际问题解决
 
 >  Sunny软件公司开发人员为公司内部OA系统开发了一个桌面版应用程序，该应用程序为用户提供了一系列自定义功能键，用户可以通过这些功能键来实现一些快捷操作。Sunny软件公司开发人员通过分析，发现不同的用户可能会有不同的使用习惯，在设置功能键的时候每个人都有自己的喜好，例如有的人喜欢将第一个功能键设置为“打开帮助文档”，有的人则喜欢将该功能键设置为“最小化至托盘”，为了让用户能够灵活地进行功能键的设置，开发人员提供了一个“功能键设置”窗口，该窗口界面如图2所示：
 >
->  ![1366033417_2468](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206301011141.jpg)
+>  ![1366033417_2468](https://img.wyantao.com/img/202206301011141.jpg)
 >
 >
 >  图2  “功能键设置”界面效果图
@@ -207,7 +207,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220630103401776](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206301034977.png)
+![image-20220630103401776](https://img.wyantao.com/img/202206301034977.png)
 
 > 可见，设置和使用按键是分开的。这里设置的时候属于是命令发送者，而每一个具体的命令实现属于命令接收者。
 >

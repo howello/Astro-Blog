@@ -146,7 +146,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220629140832083](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206291408284.png)
+![image-20220629140832083](https://img.wyantao.com/img/202206291408284.png)
 
 ## 添加一个区域经理
 
@@ -203,7 +203,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220629141410869](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206291414027.png)
+![image-20220629141410869](https://img.wyantao.com/img/202206291414027.png)
 
 ## 纯与不纯的职责链模式
 

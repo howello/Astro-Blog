@@ -128,7 +128,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220628093042362](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206280930704.png)
+![image-20220628093042362](https://img.wyantao.com/img/202206280930704.png)
 
 > 很明显，spring里面切面的思想就是根据这个做的。
 

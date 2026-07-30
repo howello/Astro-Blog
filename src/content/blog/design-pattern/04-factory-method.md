@@ -107,7 +107,7 @@ updated: 2026-07-29
 
 4. 测试结果
 
-![image-20220531105450751](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205311054925.png)
+![image-20220531105450751](https://img.wyantao.com/img/202205311054925.png)
 
 ## 总结
 

@@ -20,15 +20,15 @@ updated: 2026-07-29
 >
 > 【A pattern is a successful or efficient solution to a recurring  problem within a context】
 
-![image-20220530114027635](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205301140679.png)
+![image-20220530114027635](https://img.wyantao.com/img/202205301140679.png)
 
 ## 常用设计模式
 
-![image-20220530151419971](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205301514060.png)
+![image-20220530151419971](https://img.wyantao.com/img/202205301514060.png)
 
-![image-20220530151437718](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205301514794.png)
+![image-20220530151437718](https://img.wyantao.com/img/202205301514794.png)
 
-![image-20220530151453440](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202205301514493.png)
+![image-20220530151453440](https://img.wyantao.com/img/202205301514493.png)
 
 ## 学前所知
 

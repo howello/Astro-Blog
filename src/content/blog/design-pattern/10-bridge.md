@@ -26,7 +26,7 @@ updated: 2026-07-29
 
 好jb抽象
 
-![Factory](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206071115409.png)
+![Factory](https://img.wyantao.com/img/202206071115409.png)
 
 > 需求：需要制造电脑，根据用户输入，制造出对应的笔记本电脑、平板电脑、台式机以及对应厂家生产的这几种电脑。
 
@@ -163,7 +163,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220607113352925](https://howe-pic-bed.oss-cn-beijing.aliyuncs.com/picbed/202206071133035.png)
+![image-20220607113352925](https://img.wyantao.com/img/202206071133035.png)
 
 ## 总结
 
