@@ -124,9 +124,10 @@ export default {
       // 想加/删外链，直接增删下面 children 里的 { text, link } 即可（请按需替换成你自己的站点）
       text: '外链', icon: 'Nav_link', children: [
         { text: 'GitHub', link: 'https://github.com/howello' },
-        { text: 'Astro 官网', link: 'https://astro.build/' },
+        { text: 'Dpanel', link: 'https://dpanel.wyantao.com/' },
         { text: '后台管理', link: 'https://admin.wyantao.com/' },
         { text: 'Ai', link: 'https://ai.wyantao.com/' },
+        { text: 'CPA', link: 'https://cpa.wyantao.com/' },
         { text: 'Mail', link: 'https://mail.wyantao.com/' },
         { text: '时光倒计时', link: 'https://timer.wyantao.com/' },
         { text: '接龙小游戏', link: 'https://game.wyantao.com/' },
