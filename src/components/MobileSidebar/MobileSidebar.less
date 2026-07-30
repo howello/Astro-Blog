@@ -41,7 +41,9 @@
     background-color: var(--vh-white-color);
     transform: translateX(-1rem);
     transition: transform 0.18s ease-in;
-    overflow: hidden;
+    overflow-x: hidden;
+    // 分组变多后可能超出屏高，允许纵向滚动
+    overflow-y: auto;
 
     &>.vh-mobilesidebar-list {
       box-sizing: border-box;
@@ -59,6 +61,39 @@
         &>h3 {
           text-align: center;
         }
+      }
+
+      // 分组标题（外链下拉在移动端平铺后的组头 / 次级导航组头）
+      &>.vh-nav-group-title {
+        box-sizing: border-box;
+        margin: 0.28rem 0 0.08rem;
+        padding: 0 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.618rem;
+        width: 100%;
+        height: 1.5rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #98A2B3;
+        user-select: none;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &>svg {
+          width: auto;
+          height: 0.828rem;
+          object-fit: contain;
+        }
+      }
+
+      // 二级项：缩进一级以体现从属关系
+      &>a.vh-nav-child {
+        padding-left: 1.88rem;
+        font-size: 0.92rem;
+        font-weight: 500;
       }
 
       &>a {

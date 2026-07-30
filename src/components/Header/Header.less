@@ -77,6 +77,113 @@ header.vh-header {
           cursor: pointer;
         }
 
+        // ============================ 外链下拉菜单（纯 CSS，无 JS） ============================
+        &.has-children {
+          position: relative;
+          cursor: default;
+          outline: none;
+
+          // 父项与下拉面板之间有一段视觉空隙，用伪元素桥接成可 hover 的连续区域，
+          // 否则鼠标从父项往下移动的瞬间会先离开父项导致菜单收起
+          // 注意：.vh-hover 已占用 ::before 做悬浮底色，这里只能用 ::after
+          &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 100%;
+            height: 1.18rem;
+            // 默认不吃事件，避免这条透明桥接带遮住 Header 下方内容的点击
+            pointer-events: none;
+          }
+
+          // hover 或键盘聚焦（含焦点落在下拉项上）时展开
+          &:hover,
+          &:focus,
+          &:focus-within {
+            &::after {
+              pointer-events: auto;
+            }
+
+            &>.nav-arrow {
+              transform: rotate(180deg);
+            }
+
+            &>.nav-dropdown {
+              opacity: 1;
+              visibility: visible;
+              transform: translate(-50%, 0);
+              pointer-events: auto;
+            }
+          }
+
+          &>.nav-arrow {
+            height: 0.88rem;
+            transition: transform 0.18s ease-in-out;
+          }
+
+          &>.nav-dropdown {
+            position: absolute;
+            left: 50%;
+            top: calc(100% + 1.06rem);
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0.38rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.18rem;
+            width: max-content;
+            min-width: 9.88rem;
+            list-style: none;
+            border-radius: var(--vh-main-radius);
+            backdrop-filter: blur(2rem);
+            background-color: rgba(255, 255, 255, 0.72);
+            box-shadow: var(--vh-box-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -0.5rem);
+            pointer-events: none;
+            transition: opacity 0.18s ease-in-out, transform 0.18s ease-in-out, visibility 0.18s ease-in-out;
+            z-index: 1;
+
+            &>li {
+              width: 100%;
+              list-style: none;
+
+              &>a {
+                box-sizing: border-box;
+                padding: 0 0.618rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.88rem;
+                width: 100%;
+                height: 2.18rem;
+                font-size: 0.88rem;
+                font-weight: 600;
+                white-space: nowrap;
+                color: var(--vh-font-color);
+                border-radius: 0.5rem;
+                transition: all 0.18s ease-in-out;
+
+                &:hover,
+                &:focus-visible {
+                  color: var(--vh-white-color);
+                  background-color: var(--vh-main-color);
+                }
+
+                &>svg {
+                  flex-shrink: 0;
+                  width: auto;
+                  height: 0.88rem;
+                  object-fit: contain;
+                  opacity: 0.68;
+                }
+              }
+            }
+          }
+        }
+
         &.menu-btn {
           display: none;
 
@@ -102,7 +209,10 @@ header.vh-header {
   header.vh-header {
     &>section {
       &>nav {
-        &>a.nav-link {
+
+        // 窄屏收起主导航（含外链下拉），只保留搜索与侧边栏按钮
+        &>a.nav-link,
+        &>.nav-link.has-children {
           display: none;
         }
 

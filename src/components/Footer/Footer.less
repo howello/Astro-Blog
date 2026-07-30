@@ -28,6 +28,34 @@
       gap: 0.618rem;
       line-height: 1;
 
+      // 次级导航（朋友 / 圈子 / 动态）
+      &.footer-navs {
+        gap: 1.28rem;
+        margin-bottom: 0.28rem;
+
+        &>a {
+          display: flex;
+          align-items: center;
+          gap: 0.36rem;
+          font-size: 0.88rem;
+          font-weight: 600;
+          color: var(--vh-font-color);
+          opacity: 0.68;
+          transition: all 0.18s ease-in-out;
+
+          &:hover {
+            opacity: 1;
+            color: var(--vh-main-color);
+          }
+
+          &>svg {
+            width: auto;
+            height: 0.88rem;
+            object-fit: contain;
+          }
+        }
+      }
+
       &>a {
         line-height: 1;
       }

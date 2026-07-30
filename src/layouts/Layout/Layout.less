@@ -37,3 +37,87 @@ main.main {
     }
   }
 }
+
+
+// ===================================================================== 首页 Hero 模式
+// body.vh-home 由 Layout.astro 里的 is:inline 脚本在 <body> 开头加上（刻意不服务端直出：
+// 否则 JS 被禁用或 Init 的 chunk 加载失败时，内容会永远停在 opacity:0 + pointer-events:none）；
+// swup 配了 updateBodyClass:false，导航后 body 的 class 不会自动更新，
+// 因此客户端由 src/scripts/HomeHero.ts 在每次 page:view 时重新同步（判断依据是 [data-vh-home] 标记）。
+// 三个状态 class：
+//   .vh-home           首页模式（首屏只见 Hero，其余全部隐藏）
+//   .vh-home-revealed  已展开（滚动超过阈值后 Header 常驻、内容淡入）
+//   .vh-header-peek    鼠标移到视口顶部时临时唤出 Header
+//   .vh-search-open    搜索浮层打开（浮层是 Header 的后代，期间必须锁住 Header 显示，见 src/scripts/Search.ts）
+body.vh-home {
+
+  // Hero 占满整屏：值仍取自 config 的 HomeBanner.HomeHeight，
+  // 这里的选择器权重高于 MainHeader.less 里 @media (max-width:1150px) 写死的 26rem，移动端首页同样满屏
+  &>main.main>.header-main {
+    height: var(--vh-main-header-height);
+  }
+
+  // 顶部 Header：初始上滑淡出。
+  // 刻意不加 visibility:hidden —— 它会让 Header 内的链接彻底失去可聚焦性，下面的 :focus-within 将永远不会命中
+  &>header.vh-header {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+    transition: background-color 0.18s ease-in-out, opacity 0.38s ease-in-out, transform 0.38s ease-in-out;
+  }
+
+  // 内容区与 Footer：初始下移淡出，展开时淡入上移
+  &>main.main>.main-inner,
+  &>footer.vh-footer {
+    opacity: 0;
+    transform: translateY(2rem);
+    pointer-events: none;
+    transition: opacity 0.48s ease-in-out, transform 0.48s ease-in-out;
+  }
+
+  // 未展开时强制收起 BackTop，避免与它自身的 .active 逻辑打架
+  &:not(.vh-home-revealed)>main.main>.vh-back-top {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  // 鼠标悬顶 / 指针停在 Header 上 / 搜索浮层打开 / 键盘焦点进入 Header：临时唤出。
+  // 后三条是 .vh-header-peek 之外的兜底：peek 只按指针 Y 坐标判定（HomeHero.ts 的 PEEK_AREA=90px），
+  // 而二级下拉面板与搜索浮层都远在感应区以下，只靠 peek 会在鼠标移过去的瞬间把 Header 连同浮层一起收走
+  &.vh-header-peek>header.vh-header,
+  &.vh-search-open>header.vh-header,
+  &>header.vh-header:hover,
+  &>header.vh-header:focus-within {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  // 已展开：Header 常驻，内容与 Footer 出现
+  &.vh-home-revealed {
+    &>header.vh-header {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    &>main.main>.main-inner,
+    &>footer.vh-footer {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+}
+
+// 用户偏好减少动效时去掉位移，只保留淡入淡出
+@media (prefers-reduced-motion: reduce) {
+  body.vh-home {
+
+    &>header.vh-header,
+    &>main.main>.main-inner,
+    &>footer.vh-footer {
+      transform: none !important;
+    }
+  }
+}

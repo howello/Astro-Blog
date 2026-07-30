@@ -17,7 +17,43 @@
     inset: 0;
     pointer-events: none;
     background: var(--vh-home-banner);
+    transition: opacity 0.58s ease-in-out;
     z-index: -1;
+  }
+
+  // 开启动态着色器背景时，静态图仍然是**底层兜底**：
+  // 岛是 client 渲染的，SSR 只吐出一个空 div，水合完成前（慢网可达数秒）以及
+  // WebGL2 不可用 / JS 加载失败时着色器永远画不出来，这时候必须还有背景，否则白字压在浅灰底上没法读。
+  // 只有着色器真的就绪（HomeShader.tsx 给 .header-main 加上 .shader-ready）后才淡出，避免两层背景长期叠加
+  &.has-shader.shader-ready::before {
+    opacity: 0;
+  }
+
+  // 动态着色器背景层：铺满 Banner，位于头像/文字之下，不拦截鼠标事件
+  &>.shader-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+
+    // ShaderMount 渲染的是 div > canvas，两层都要撑满
+    &>div,
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    // 轻微暗化遮罩：保证任意配色的着色器上白色文字依然可读
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgb(0 0 0 / 18%) 0%, rgb(0 0 0 / 32%) 55%, rgb(0 0 0 / 45%) 100%);
+    }
   }
 
   &>.avatar {
@@ -83,6 +119,69 @@
         opacity: 0;
       }
     }
+  }
+
+  // 首页 Hero 底部的「向下滚动」提示。默认完全隐藏，只有 body.vh-home 且未展开时才出现，
+  // 因此非首页（Header 高度较矮）不会被它撑破视觉
+  &>.vh-scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 1.88rem;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.28rem;
+    padding: 0.38rem 0.66rem;
+    width: max-content;
+    color: var(--vh-white-color);
+    font-size: 0.78rem;
+    letter-spacing: 0.188rem;
+    text-indent: 0.188rem;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.48s ease-in-out;
+
+    &:hover>svg,
+    &:focus-visible>svg {
+      opacity: 1;
+    }
+
+    &>svg {
+      width: 1.28rem;
+      height: 1.28rem;
+      opacity: 0.78;
+      animation: vh-scroll-hint-float 1.88s ease-in-out infinite;
+      transition: opacity 0.18s ease-in-out;
+    }
+  }
+}
+
+// 只有首页未展开时才显示滚动提示（class 由 src/scripts/HomeHero.ts 挂在 body 上）
+body.vh-home:not(.vh-home-revealed) .header-main>.vh-scroll-hint {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes vh-scroll-hint-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(0.5rem);
+  }
+}
+
+// 用户偏好减少动效时停掉箭头浮动
+@media (prefers-reduced-motion: reduce) {
+  .header-main>.vh-scroll-hint>svg {
+    animation: none;
   }
 }
 

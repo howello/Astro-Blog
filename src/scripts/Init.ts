@@ -13,6 +13,10 @@ import musicInit from "@/scripts/Music";
 import livePhotoInit from '@/scripts/LivePhoto'
 // 初始化BackTop组件
 import BackTopInitFn from "@/scripts/BackTop";
+// 文章目录（TOC）
+import TocInit from "@/scripts/Toc";
+// 首页 Hero 显隐（首屏只见 Banner，hover 顶部或下滑才出现 Header 与内容）
+import HomeHeroInit from "@/scripts/HomeHero";
 // 搜索
 import { searchFn, vhSearchInit } from "@/scripts/Search";
 // 图片懒加载
@@ -51,12 +55,16 @@ const indexInit = async (only: boolean = true) => {
   only && initWebSiteTime();
   // 初始化BackTop组件
   only && BackTopInitFn();
+  // 首页 Hero 显隐：only 时绑定全局监听，每次导航都要重新同步 body 上的状态 class
+  HomeHeroInit(only);
   // SmoothScroll 滚动优化
   only && SmoothScroll();
   // 图片灯箱
   only && ViewImage();
   // 初始化文章代码块
   codeInit();
+  // 文章目录（TOC）：Aside 在 swup 容器外，必须每次导航都重建
+  TocInit();
   // 图片懒加载初始化
   vhLzImgInit();
   // 初始化 LivePhoto

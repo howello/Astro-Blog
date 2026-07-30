@@ -49,9 +49,15 @@ const vhSearchInit = () => {
   const searchListDOM: any = document.querySelector(".vh-header>.main>.vh-search");
   const addActive = () => setTimeout(() => {
     searchListDOM.classList.add("active");
+    // 首页 Hero 态下 Header 默认是隐藏的，搜索浮层又是 Header 的后代，
+    // 打开期间给 body 加标记锁住 Header 显示（见 src/layouts/Layout/Layout.less）
+    document.body.classList.add("vh-search-open");
     searchListDOM.querySelector(".search-input>input").focus();
   });
-  const removeActive = () => setTimeout(() => searchListDOM.classList.remove("active"));
+  const removeActive = () => setTimeout(() => {
+    searchListDOM.classList.remove("active");
+    document.body.classList.remove("vh-search-open");
+  });
   // 禁止默认事件
   searchMainDOM.addEventListener("click", (e: Event) => e.stopPropagation());
   searchDOM.addEventListener("click", addActive);

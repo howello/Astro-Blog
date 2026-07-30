@@ -22,6 +22,9 @@ const { data, ...page_data } = page;
 // 页面 Info
 import SITE_CONFIG from "@/config";
 const { Description } = SITE_CONFIG;
+// Hero 模式只属于第 1 页：/2、/3 … 是普通文章列表页，
+// 再套一屏满高 Hero 会让翻页后的列表整块隐藏（必须再滚一次才看得到），像翻页失败
+const isFirstPage = !page_data.url.prev;
 // 博客列表组件
 import ArticleCard from "@/components/ArticleCard/ArticleCard.astro";
 // 公共 Layout
@@ -31,8 +34,10 @@ import Pagination from "@/components/Pagination/Pagination.astro";
 const currentPage = page_data.url.current.replace("/", "");
 ---
 
-<Layout title={currentPage ? `第${currentPage}页文章` : ""} description={Description} Home={true}>
-	<section class="article-list-main">
+<Layout title={currentPage ? `第${currentPage}页文章` : ""} description={Description} activeNav="home" Home={isFirstPage}>
+	<!-- data-vh-home：首页标记（只有第 1 页才输出）。它位于 swup 容器 .main-inner-content 内部，
+	     每次导航都会被替换，是客户端判断「当前是否首页」唯一可靠的依据（见 src/scripts/HomeHero.ts） -->
+	<section class="article-list-main" data-vh-home={isFirstPage ? "" : undefined}>
 		<section class="article-list">
 			<!-- 文章列表 -->
 			{data.map((post, index) => <ArticleCard post={post} index={index} />)}

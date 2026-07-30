@@ -133,6 +133,14 @@ import "./Aside.less";
 			)
 		}
 
+		<!-- 文章目录块（空壳，内容由 src/scripts/Toc.ts 客户端渲染；非文章页保持 hidden） -->
+		<!-- data-no-swup：命中 swup 的 ignoreVisit，避免目录里的 #锚点 链接被 swup + scroll-plugin 接管后
+		     滚到 y=0（标题会被 66px 固定 Header 挡住），偏移滚动由 Toc.ts 自己处理 -->
+		<section class="vh-aside-item toc" hidden>
+			<h3>目录</h3>
+			<nav class="vh-aside-toc" data-no-swup></nav>
+		</section>
+
 		<!-- 谷歌广告块 -->
 		{
 			GoogleAds.ad_Client && GoogleAds.asideAD_Slot && (

@@ -4,6 +4,9 @@ const { activeNav } = Astro.props;
 // 站点配置
 import SITE_CONFIG from "@/config";
 const { Navs } = SITE_CONFIG;
+// 导航项类型与高亮判定
+import { isNavActive, navKey, type NavItem } from "@/utils/nav";
+const navList = Navs as NavItem[];
 // Svg 组件
 import Svg from "@/components/Svg/Svg.astro";
 // 搜索框组件
@@ -20,12 +23,32 @@ import "./Header.less";
 		</a>
 		<nav>
 			{
-				Navs.map(i => (
-					<a class={`nav-link vh-hover${i.link.includes(activeNav) ? " active" : ""}`} href={i.link} target={i.target ? "_blank" : "_self"}>
-						{i.text}
-						<Svg src={i.icon} />
-					</a>
-				))
+				navList.map(i =>
+					i.children?.length ? (
+						/* 外链聚合项：纯 CSS hover / :focus-within 展开二级菜单，不依赖任何 JS，
+						   所以 swup 替换 .vh-header>.main 之后无需重新绑定事件 */
+						<div class="nav-link vh-hover has-children" tabindex="0" role="button" aria-haspopup="true">
+							{i.text}
+							<Svg src={i.icon} />
+							<svg class="nav-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 9l6 6l6 -6" /></svg>
+							<ul class="nav-dropdown">
+								{i.children.map(c => (
+									<li>
+										<a href={c.link} target="_blank" rel="noopener noreferrer">
+											<span>{c.text}</span>
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" /></svg>
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					) : (
+						<a class={`nav-link vh-hover${isNavActive(i, activeNav) ? " active" : ""}`} data-nav={navKey(i.link)} href={i.link} target={i.target ? "_blank" : "_self"}>
+							{i.text}
+							<Svg src={i.icon} />
+						</a>
+					)
+				)
 			}
 			<span class="nav-link vh-hover search-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg> 搜索</span>
 			<span class="nav-link vh-hover menu-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg></span>

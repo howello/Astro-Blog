@@ -24,6 +24,14 @@ import "@/styles/Reset.less";
 import "@/styles/Base.less";
 // Layout 样式
 import "./Layout.less";
+// Hero 模式：只有「首页」且 Banner 本体开着时才成立。
+// HomeBanner.enable=false 时 MainHeader 不渲染（连「向下滚动」提示一起没了），
+// 再把 Header/内容/Footer 藏起来就只剩一屏纯白，没有任何可视线索
+const heroMode = !!Home && HomeBanner.enable;
+// Hero 模式下 body 需要的 class 与「JS 挂了就自动降级」的兜底脚本。
+// 刻意不在服务端直出 vh-home：那样一旦 Init 的 chunk 加载失败或 JS 被禁用，
+// 内容会永远停在 opacity:0 + pointer-events:none，整页只剩 Hero
+const heroBootScript = `document.body.classList.add("vh-home");window.__vhHeroFallback=setTimeout(function(){document.body.classList.remove("vh-home","vh-home-revealed","vh-header-peek")},8000)`;
 ---
 
 <html lang="zh-CN">
@@ -36,10 +44,11 @@ import "./Layout.less";
 		<Fragment
 			set:html={`<style>:root {${Object.entries(Theme)
 				.map(([key, value]) => `${key}:${value};`)
-				.join("")}--vh-main-header-height:${Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--vh-home-banner:${HomeBanner.background}}</style>`}
+				.join("")}--vh-main-header-height:${heroMode ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--vh-home-banner:${HomeBanner.background}}</style>`}
 		/>
 	</Head>
 	<body>
+		{heroMode && <script is:inline set:html={heroBootScript} />}
 		<MobileSidebar />
 		<Header activeNav={activeNav} />
 		<main class="main">

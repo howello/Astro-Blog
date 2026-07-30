@@ -15,6 +15,8 @@ import { remarkNote, addClassNames } from './src/plugins/markdown.custom'
 // Markdown 配置================
 import SITE_INFO from './src/config';
 import swup from '@swup/astro';
+// React 集成：仅用于 @paper-design/shaders-react 着色器岛（首页 Banner 动态背景）
+import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_INFO.Site,
@@ -32,6 +34,7 @@ export default defineConfig({
 		updateBodyClass: false,
 		globalInstance: true
 	}),
+	react(),
 	Compress({ Image: false, Action: { Passed: async () => true } }),
 	sitemap({
 		// 处理末尾带 / 的 url

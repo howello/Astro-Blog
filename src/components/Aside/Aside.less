@@ -18,6 +18,20 @@ aside.vh-aside {
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+    // 钉住后整块必须落在视口内：减去固定 Header(66px) 和上下各 1rem 间距。
+    // 不加这条时「推荐文章 + 目录」串起来约 790px，1440×900 这类笔电（视口高 ~760px）
+    // 底部一百多像素会被永久挤到视口下沿之外，整篇文章滚动期间都摸不到（dvh 兜底给旧浏览器）
+    max-height: calc(100vh - 66px - 2rem);
+    max-height: calc(100dvh - 66px - 2rem);
+
+    // 空间不够时只压缩目录（它自带内部滚动），推荐文章/广告保持原高度，不被裁切
+    &>.vh-aside-item {
+      flex-shrink: 0;
+    }
+
+    &>.vh-aside-item.toc {
+      flex-shrink: 1;
+    }
   }
 
   .vh-aside-item {
@@ -35,6 +49,11 @@ aside.vh-aside {
     background-color: var(--vh-white-color);
     box-shadow: var(--vh-box-shadow);
     overflow: hidden;
+
+    // 隐藏态（.vh-aside-item 是 flex，hidden 属性自带的 display:none 会被它覆盖，需显式声明）
+    &[hidden] {
+      display: none;
+    }
 
     &>h3 {
       width: 100%;
@@ -425,6 +444,79 @@ aside.vh-aside {
             font-size: 0.688rem;
           }
 
+        }
+      }
+    }
+
+    // 文章目录（内容由 src/scripts/Toc.ts 客户端渲染）
+    &.toc {
+      &>.vh-aside-toc {
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: max-content;
+        max-height: 21.88rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &>.vh-toc-item {
+          position: relative;
+          flex-shrink: 0;
+          box-sizing: border-box;
+          padding: 0.38rem 0 0.38rem 0.68rem;
+          width: 100%;
+          font-size: 0.8rem;
+          line-height: 1.5;
+          color: var(--vh-font-66);
+          transition: color 0.18s ease-in-out, padding-left 0.18s ease-in-out;
+
+          // 左侧竖条：默认是一段浅色轨道，逐条相接形成连续的竖线
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            border-radius: 2px;
+            background-color: var(--vh-font-16);
+            transition: background 0.18s ease-in-out;
+          }
+
+          &:hover {
+            color: var(--vh-main-color);
+
+            &::before {
+              background-color: var(--vh-main-color-56);
+            }
+          }
+
+          // 当前所处章节
+          &.active {
+            color: var(--vh-main-color);
+
+            &::before {
+              background-color: var(--vh-main-color);
+            }
+          }
+
+          // 层级缩进
+          &.vh-toc-h2 {
+            padding-left: 0.68rem;
+          }
+
+          &.vh-toc-h3 {
+            padding-left: 1.58rem;
+            font-size: 0.78rem;
+          }
+
+          &.vh-toc-h4 {
+            padding-left: 2.48rem;
+            font-size: 0.76rem;
+            color: var(--vh-font-56);
+          }
         }
       }
     }

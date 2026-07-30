@@ -1,12 +1,27 @@
 ---
 import SITE_INFO from "@/config";
+import HomeShader from "@/components/HomeShader/HomeShader";
 import "./MainHeader.less";
+// 是否启用动态着色器背景：启用后给 .header-main 加 has-shader，关掉 ::before 的静态图背景
+const shaderEnable = SITE_INFO.HomeShader?.enable ?? false;
 ---
 
-<div class="header-main">
+<div class:list={["header-main", { "has-shader": shaderEnable }]}>
+	{shaderEnable && (
+		<div class="shader-bg">
+			{/* client:idle：着色器岛（React + shaders 约 330KB）不参与首屏关键路径，
+			    等浏览器空闲再水合；这期间 Banner 由 .header-main::before 的静态图顶着 */}
+			<HomeShader client:idle />
+		</div>
+	)}
 	<div class="avatar">
 		<img src="/assets/images/lazy-loading.webp" data-vh-lz-src={SITE_INFO.Avatar} alt="avatar" />
 	</div>
 	<h3 class="auther">{SITE_INFO.Author || "-"}</h3>
 	<p class="desc"></p>
+	<!-- 首页向下滚动提示：显隐完全由 body.vh-home / .vh-home-revealed 控制（见 MainHeader.less），非首页始终不可见 -->
+	<div class="vh-scroll-hint" role="button" tabindex="0" aria-label="向下滚动查看文章列表">
+		<span>向下滚动</span>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M18 13l-6 6"></path><path d="M6 13l6 6"></path></svg>
+	</div>
 </div>

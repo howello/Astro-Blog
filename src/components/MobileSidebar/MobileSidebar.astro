@@ -1,6 +1,10 @@
 ---
 import SITE_CONFIG from "@/config";
-const { Navs, Title } = SITE_CONFIG;
+const { Navs, SubNavs, Title } = SITE_CONFIG;
+// 导航项类型与路由标识
+import { navKey, type NavItem } from "@/utils/nav";
+const navList = Navs as NavItem[];
+const subNavList = (SubNavs || []) as NavItem[];
 // Svg 组件
 import Svg from "@/components/Svg/Svg.astro";
 // 侧边栏 MobileSidebar 样式
@@ -15,13 +19,43 @@ import "./MobileSidebar.less";
 
 		<div class="vh-mobilesidebar-list vh-link-list">
 			{
-				Navs.map(i => (
-					<a class={i.link.replace("/", "")} href={i.link} target={i.target ? "_blank" : "_self"}>
-						<Svg src={i.icon} />
-						{i.text}
-					</a>
-				))
+				navList.map(i =>
+					i.children?.length ? (
+						/* 移动端没有 hover，二级菜单平铺成一个带缩进的分组 */
+						<Fragment>
+							<p class="vh-nav-group-title">
+								<Svg src={i.icon} />
+								{i.text}
+							</p>
+							{i.children.map(c => (
+								<a class="vh-nav-child" href={c.link} target="_blank" rel="noopener noreferrer">
+									{c.text}
+								</a>
+							))}
+						</Fragment>
+					) : (
+						<a class={navKey(i.link)} href={i.link} target={i.target ? "_blank" : "_self"}>
+							<Svg src={i.icon} />
+							{i.text}
+						</a>
+					)
+				)
 			}
 		</div>
+
+		{
+			/* 次级导航：不进主导航但仍需可达的站内页 */
+			subNavList.length > 0 && (
+				<div class="vh-mobilesidebar-list vh-link-list">
+					<p class="vh-nav-group-title">更多</p>
+					{subNavList.map(i => (
+						<a class={navKey(i.link)} href={i.link} target={i.target ? "_blank" : "_self"}>
+							<Svg src={i.icon} />
+							{i.text}
+						</a>
+					))}
+				</div>
+			)
+		}
 	</section>
 </nav>
