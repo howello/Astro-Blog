@@ -125,7 +125,11 @@ export default {
       text: '外链', icon: 'Nav_link', children: [
         { text: 'GitHub', link: 'https://github.com/howello' },
         { text: 'Astro 官网', link: 'https://astro.build/' },
-        { text: 'MDN Web Docs', link: 'https://developer.mozilla.org/zh-CN/' },
+        { text: '后台管理', link: 'https://admin.wyantao.com/' },
+        { text: 'Ai', link: 'https://ai.wyantao.com/' },
+        { text: 'Mail', link: 'https://mail.wyantao.com/' },
+        { text: '时光倒计时', link: 'https://timer.wyantao.com/' },
+        { text: '接龙小游戏', link: 'https://game.wyantao.com/' },
       ]
     },
     { text: '留言', link: '/message', icon: 'Nav_message' },
