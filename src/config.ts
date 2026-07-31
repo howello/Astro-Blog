@@ -223,7 +223,7 @@ export default {
       // ------------------------------------------------------------------
       ImageUpload: {
         // 上传端点
-        uploadURL: '',
+        uploadURL: 'https://admin.wyantao.com/api/common/upload/image',
         // 图片公开读取地址前缀（Cloudflare R2 自定义域）
         publicPrefix: 'https://img.wyantao.com/img'
       }
