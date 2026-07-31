@@ -27,8 +27,7 @@ const uploadImage = async (file: File): Promise<string> => {
   const body = new FormData();
   body.append('file', file);
   const res = await fetch(uploadURL, { method: "POST", body });
-  // const link = (await res.json())?.data?.link;
-  const link = res.url
+  const link = (await res.json())?.url;
   if (!link) throw new Error('评论图片上传失败：响应中缺少 data.link');
   return /^https?:\/\//.test(link) ? link : `${publicPrefix.replace(/\/$/, '')}/${link.replace(/^\/+/, '')}`;
 }
