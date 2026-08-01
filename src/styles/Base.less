@@ -240,6 +240,22 @@ html.is-animating {
 	}
 }
 
+// 列表页的空数据 / 加载失败提示
+// 与 .vh-space-loading 同为「占位」语义，所以放在一起；grid-column 让它在
+// 友链页那种网格容器里也能独占整行，不会被挤成一个格子。
+.vh-list-tip {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	grid-column: 1 / -1;
+	width: 100%;
+	padding: 3rem 1rem;
+	color: var(--vh-gray-color, #999);
+	font-size: 0.875rem;
+	text-align: center;
+}
+
 // 占位加载
 .vh-space-loading {
 	box-sizing: border-box;

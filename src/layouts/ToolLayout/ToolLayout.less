@@ -37,6 +37,35 @@
           gap: 1rem;
           background-color: var(--vh-white-color);
 
+          // 分组小标题：与卡片平级，独占整行。
+          // 之所以不把每组包一层容器，是因为下面的卡片样式挂在直接子元素 &>a 上，
+          // 多包一层会让它们全部失效。
+          &>.links-group-title {
+            grid-column: 1 / -1;
+            margin: 0.5rem 0 0;
+            padding-left: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.8;
+            border-left: solid 3px var(--vh-main-color, #1a73e8);
+          }
+
+          // 客户端分页器（友链页不分页，此处仅为与其它两页结构一致时不塌陷）
+          &>.vh-art-page {
+            grid-column: 1 / -1;
+          }
+
+          // 未配置头像时的文字兜底，复用 .avatar 的圆形外观
+          &>a>.avatar-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--vh-font-color);
+            background-color: var(--vh-font-16);
+          }
+
           &>a {
             position: relative;
             box-sizing: border-box;
@@ -282,6 +311,49 @@
                 cursor: zoom-in;
                 cursor: -moz-zoom-in;
                 cursor: -webkit-zoom-in;
+              }
+
+              // marked 渲染的 markdown 正文适配
+              // ------------------------------------------------------------
+              // 说说正文改由后端存 markdown 原文、前端用 marked 渲染，产出的 <img>
+              // 不带主题的 .vh-img-flex 包裹，会命中上面那条 aspect-ratio: 3/2 的规则
+              // 而被强行压成固定比例。这里按段落图片还原成自适应高度。
+              // 不去改 marked 的 renderer——渲染器只该管 markdown 语义，排版归 CSS。
+              // ------------------------------------------------------------
+              &>p>img {
+                aspect-ratio: auto;
+                max-width: 100%;
+                object-fit: contain;
+              }
+
+              &>p {
+                margin: 0 0 0.75rem;
+                line-height: 1.8;
+
+                &:last-child {
+                  margin-bottom: 0;
+                }
+              }
+
+              &>ul,
+              &>ol {
+                margin: 0 0 0.75rem;
+                padding-left: 1.5rem;
+                line-height: 1.8;
+              }
+
+              &>blockquote {
+                margin: 0 0 0.75rem;
+                padding: 0.5rem 0.875rem;
+                border-left: solid 3px var(--vh-font-16);
+                color: var(--vh-font-66);
+              }
+
+              &>pre {
+                padding: 0.875rem;
+                border-radius: 0.375rem;
+                background-color: var(--vh-font-16);
+                overflow-x: auto;
               }
 
               &>.vh-img-flex {

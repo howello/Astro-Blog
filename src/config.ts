@@ -163,9 +163,9 @@ export default {
   // 避免这些页面变成没有任何入口的死页面。字段同 Navs（不支持 children）。
   // ------------------------------------------------------------------
   SubNavs: [
-    { text: '朋友', link: '/links', icon: 'Nav_friends' },
-    { text: '圈子', link: '/friends', icon: 'Nav_rss' },
-    { text: '动态', link: '/talking', icon: 'Nav_talking' },
+    { text: '友链', link: '/links', icon: 'Nav_friends' },
+    { text: '朋友圈', link: '/friends', icon: 'Nav_rss' },
+    { text: '说说', link: '/talking', icon: 'Nav_talking' },
   ],
   // 侧边栏个人网站
   WebSites: [
@@ -228,6 +228,21 @@ export default {
         publicPrefix: 'https://img.wyantao.com/img'
       }
     }
+  },
+  // 后端 API（友链/朋友圈/说说三页的数据源）
+  // ------------------------------------------------------------------
+  // 这三页不再有静态兜底数据，baseURL 留空或后端不可达时页面会显示明确的失败提示，
+  // 而不是静默留白。接口全部是匿名只读的（后端 @Anonymous + 按 IP 限流），
+  // 不需要也不应该在这里放任何令牌。
+  // 后端已配置全局 CorsFilter 通配放行，跨域无需额外处理。
+  // ------------------------------------------------------------------
+  BlogApi: {
+    // 末尾不带斜杠
+    baseURL: 'https://admin.wyantao.com/api',
+    // 朋友圈与说说的每页条数（友链页返回全量，不受此值影响）
+    pageSize: 12,
+    // 单次请求超时（毫秒）
+    timeout: 8000
   },
   // Han Analytics 统计（https://github.com/uxiaohan/HanAnalytics）
   // 已关闭：原值会把访问数据上报到主题作者的服务器。如需启用请自建服务并填入自己的 server / siteId
