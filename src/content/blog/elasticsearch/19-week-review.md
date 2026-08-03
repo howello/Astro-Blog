@@ -8,6 +8,7 @@ tags:
   - Java
 id: elasticsearch-week-review
 date: 2025-02-28 14:00:00
+recommend: true
 ---
 
 ## 学习目标
