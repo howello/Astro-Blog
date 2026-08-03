@@ -137,7 +137,9 @@ export default {
   // ------------------------------------------------------------------
   Navs: [
     { text: '首页', link: '/', icon: 'Nav_home' },
-    { text: '列表', link: '/archives', icon: 'Nav_archives' },
+    { text: '文章', link: '/archives', icon: 'Nav_archives' },
+    { text: '留言', link: '/message', icon: 'Nav_message' },
+    { text: '友链', link: '/links', icon: 'Nav_friends' },
     {
       // 外链聚合项：本身不跳转，hover / 键盘聚焦时展开二级菜单
       // 想加/删外链，直接增删下面 children 里的 { text, link } 即可（请按需替换成你自己的站点）
@@ -152,7 +154,6 @@ export default {
         { text: '接龙小游戏', link: 'https://game.wyantao.com/' },
       ]
     },
-    { text: '留言', link: '/message', icon: 'Nav_message' },
     { text: '关于', link: '/about', icon: 'Nav_about' },
   ],
   // 次级导航（站内页面，不占用顶部主导航的位置）
@@ -161,9 +162,8 @@ export default {
   // 避免这些页面变成没有任何入口的死页面。字段同 Navs（不支持 children）。
   // ------------------------------------------------------------------
   SubNavs: [
-    { text: '友链', link: '/links', icon: 'Nav_friends' },
-    { text: '朋友圈', link: '/friends', icon: 'Nav_rss' },
-    { text: '说说', link: '/talking', icon: 'Nav_talking' },
+    // { text: '朋友圈', link: '/friends', icon: 'Nav_rss' },
+    { text: '碎碎念', link: '/talking', icon: 'Nav_talking' },
   ],
   // 侧边栏个人网站
   WebSites: [
