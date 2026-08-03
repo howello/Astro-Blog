@@ -7,7 +7,7 @@ tags:
   - 设计模式入门
 id: design-pattern-intro
 date: 2022-05-30 11:40:27
-updated: 2026-07-29
+recommend: true
 ---
 
 ## Christopher Alexander（克里斯托弗.亚历山大）
