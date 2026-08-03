@@ -24,6 +24,14 @@ section.vh-archive-main {
         font-size: 1rem;
         transition: background .18s;
 
+        // 总览页标题行（p.title em）承载中文「全部分类/全部标签」，字数多于年份/日期，
+        // 固定 5.05rem 会把末字折到第二行；改用内容自适应宽度，列表行的 em 仍保持原宽
+        &.title {
+          &>em {
+            width: auto;
+            min-width: max-content;
+          }
+        }
 
         &:not(.title) {
           &:hover {
@@ -124,6 +132,38 @@ section.vh-archive-main {
           font-style: normal;
         }
       }
+
+      // 公告总览页：固定圆点与时间列，避免 flex 把时间压窄并把圆点推到最右侧
+      &>[data-notice-toggle]>i {
+        flex: 0 0 2.5rem;
+      }
+
+      &>[data-notice-toggle]>cite {
+        flex: 0 0 13rem;
+        width: 13rem;
+        min-width: 13rem;
+        white-space: nowrap;
+      }
+
+      // 公告总览页：列表行直接复用 archive-list-item > a 样式，这里只处理同级展开正文
+      &>.notice-content {
+        margin: 0.5rem 0 0.88rem 2.5rem;
+        padding: 1rem;
+        color: var(--vh-font-66);
+        line-height: 1.8;
+        border-radius: 0.88rem;
+        background-color: var(--vh-font-6);
+        overflow-wrap: anywhere;
+
+        &[hidden] {
+          display: none;
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
     }
   }
 }
@@ -140,6 +180,13 @@ section.vh-archive-main {
           &>cite {
             display: none;
           }
+        }
+
+        &>[data-notice-toggle]>cite {
+          display: block;
+          flex-shrink: 0;
+          width: 10.5rem;
+          min-width: 10.5rem;
         }
       }
     }

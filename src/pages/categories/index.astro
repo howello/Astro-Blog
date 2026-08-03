@@ -2,29 +2,28 @@
 import { getCategories } from "@/utils/getPostInfo";
 import SITE_CONFIG from "@/config";
 import Layout from "@/layouts/Layout/Layout.astro";
+import "@/components/Archive/Archive.less";
 
 const { Description } = SITE_CONFIG;
 const categories = getCategories().sort((a, b) => b.count - a.count || a.title.localeCompare(b.title));
 ---
 
 <Layout title="分类" description={Description} activeNav="categories">
-	<section class="vh-container">
-		<div class="vh-archive-main vh-animation vh-animation-init">
-			<div class="archive-list">
-				<div class="archive-list-item">
-					<p class="title">
-						<em>全部分类</em>
+	<section class="vh-archive-main vh-animation vh-animation-init">
+		<div class="archive-list">
+			<div class="archive-list-item">
+				<p class="title">
+					<em>全部分类</em>
+					<i />
+					<span>{categories.length}个分类</span>
+				</p>
+				{categories.map(item => (
+					<a href={`/categories/${item.title}`}>
+						<span>{item.title}</span>
 						<i />
-						<span>{categories.length}个分类</span>
-					</p>
-					{categories.map(item => (
-						<a href={`/categories/${item.title}`}>
-							<span>{item.title}</span>
-							<i />
-							<cite>{item.count}篇文章</cite>
-						</a>
-					))}
-				</div>
+						<cite>{item.count}篇文章</cite>
+					</a>
+				))}
 			</div>
 		</div>
 	</section>

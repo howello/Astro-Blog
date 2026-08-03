@@ -2,29 +2,28 @@
 import { getTags } from "@/utils/getPostInfo";
 import SITE_CONFIG from "@/config";
 import Layout from "@/layouts/Layout/Layout.astro";
+import "@/components/Archive/Archive.less";
 
 const { Description } = SITE_CONFIG;
 const tags = getTags().sort((a, b) => Number(b[1]) - Number(a[1]) || String(a[0]).localeCompare(String(b[0])));
 ---
 
 <Layout title="标签" description={Description} activeNav="tags">
-	<section class="vh-container">
-		<div class="vh-archive-main vh-animation vh-animation-init">
-			<div class="archive-list">
-				<div class="archive-list-item">
-					<p class="title">
-						<em>全部标签</em>
+	<section class="vh-archive-main vh-animation vh-animation-init">
+		<div class="archive-list">
+			<div class="archive-list-item">
+				<p class="title">
+					<em>全部标签</em>
+					<i />
+					<span>{tags.length}个标签</span>
+				</p>
+				{tags.map(([tag, count]) => (
+					<a href={`/tag/${String(tag)}`}>
+						<span>{String(tag)}</span>
 						<i />
-						<span>{tags.length}个标签</span>
-					</p>
-					{tags.map(([tag, count]) => (
-						<a href={`/tag/${String(tag)}`}>
-							<span>{String(tag)}</span>
-							<i />
-							<cite>{count}篇文章</cite>
-						</a>
-					))}
-				</div>
+						<cite>{count}篇文章</cite>
+					</a>
+				))}
 			</div>
 		</div>
 	</section>

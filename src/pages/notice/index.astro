@@ -1,15 +1,21 @@
 ---
 import SITE_CONFIG from "@/config";
 import Layout from "@/layouts/Layout/Layout.astro";
+import "@/components/Archive/Archive.less";
 
 const { Description } = SITE_CONFIG;
 ---
 
 <Layout title="公告" description={Description} activeNav="notice">
-  <section class="vh-container">
-    <main class="notice-main" data-notices-page>
-      <p class="notice-state" data-notice-state>加载中...</p>
-      <div class="notice-list" data-notice-list></div>
-    </main>
-  </section>
+	<section class="vh-archive-main vh-animation vh-animation-init" data-notices-page>
+		<div class="archive-list">
+			<div class="archive-list-item" data-notice-list>
+				<p class="title">
+					<em>全部公告</em>
+					<i />
+					<span data-notice-count>加载中...</span>
+				</p>
+			</div>
+		</div>
+	</section>
 </Layout>

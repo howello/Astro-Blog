@@ -40,35 +40,35 @@ import "./Aside.less";
 					))}
 				</section>
 				<section class="vh-aside-info">
-					<div class="art-item count">
+					<a class="art-item count" href="/archives/">
 						<span>{CountInfo.ArticleCount}</span>
 						<p>文章数</p>
-					</div>
-					<div class="cat-item count">
+					</a>
+					<a class="cat-item count" href="/categories/">
 						<span>{CountInfo.CategoryCount}</span>
 						<p>分类数</p>
-					</div>
-					<div class="tag-item count">
+					</a>
+					<a class="tag-item count" href="/tag/">
 						<span>{CountInfo.TagCount}</span>
 						<p>标签数</p>
-					</div>
+					</a>
 				</section>
 				<canvas class="vh-aside-canvas" width="888" height="1888" />
 			</section>
 		)
 	}
 
-		<!-- 公告块 -->
-		<section class="vh-aside-item tips" data-notices>
-			<div class="vh-aside-heading"><span>公告</span><a class="aside-more" href="/notice/">更多</a></div>
-			<div class="tips-content" data-notice-state>加载中...</div>
-		</section>
+	<!-- 公告块 -->
+	<section class="vh-aside-item tips" data-notices>
+		<div class="vh-aside-heading"><span>公告</span><a class="aside-more" href="/notice/">更多 >></a></div>
+		<div class="tips-content" data-notice-state>加载中...</div>
+	</section>
 
 	<!-- 分类块 -->
 	{
 		AsideShow.CategoriesShow && (
 			<section class="vh-aside-item cat">
-				<div class="vh-aside-heading"><h3>分类</h3><a class="aside-more" href="/categories/">更多</a></div>
+				<div class="vh-aside-heading"><h3>分类</h3><a class="aside-more" href="/categories/">更多 >></a></div>
 				<div class="vh-aside-cat">
 					{categories
 						.sort((a: any, b: any) => b.count - a.count)
@@ -87,7 +87,7 @@ import "./Aside.less";
 	{
 		AsideShow.TagsShow && (
 			<section class="vh-aside-item tags">
-				<div class="vh-aside-heading"><h3>热门标签</h3><a class="aside-more" href="/tag/">更多</a></div>
+				<div class="vh-aside-heading"><h3>热门标签</h3><a class="aside-more" href="/tag/">更多 >></a></div>
 				<div class="vh-aside-tags">
 					{tags.map(i => (
 						<a href={`/tag/${i[0]}`}>
@@ -105,7 +105,7 @@ import "./Aside.less";
 		{
 			recommendArticles.length && AsideShow.recommendArticleShow && (
 				<section class="vh-aside-item articles">
-					<div class="vh-aside-heading"><h3>推荐文章</h3><a class="aside-more" href="/recommend/">更多</a></div>
+					<div class="vh-aside-heading"><h3>推荐文章</h3><a class="aside-more" href="/recommend/">更多 >></a></div>
 					<div class="vh-aside-articles">
 						{recommendArticles.map((i, idx) => (
 							<a href={`/article/${i.id}`}>
