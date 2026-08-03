@@ -39,7 +39,7 @@ const renderItem = (notice: Notice): string => {
   // 公告正文是后台可信富文本，仅在点击展开时以原始 HTML 注入展开区
   return `<a href="javascript:;" data-notice-toggle data-notice-id="${notice.noticeId}">
     <span class="vh-ellipsis">${safeTitle}</span>
-    <i />
+    <i></i>
     <cite>${safeTime}</cite>
   </a>
   <div class="notice-content" data-notice-content="${notice.noticeId}" hidden></div>`;
