@@ -27,6 +27,57 @@
       width: 100%;
       height: max-content;
 
+      &.notice-main {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+
+        .notice-state {
+          margin: 0;
+          padding: 1rem;
+          color: var(--vh-font-56);
+          background-color: var(--vh-white-color);
+          border-radius: 0.5rem;
+          box-shadow: var(--vh-box-shadow);
+        }
+
+        .notice-item {
+          padding: 1.25rem;
+          background-color: var(--vh-white-color);
+          border-radius: 0.5rem;
+          box-shadow: var(--vh-box-shadow);
+
+          header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+
+            h2 {
+              margin: 0;
+              font-size: 1.08rem;
+            }
+
+            time {
+              flex-shrink: 0;
+              color: var(--vh-font-56);
+              font-size: 0.75rem;
+            }
+          }
+
+          .notice-content {
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+          }
+        }
+      }
+
       &.main {
 
         // 友情链接

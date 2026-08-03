@@ -5,8 +5,8 @@
 //   · 一言  config.ts 的 TypeWriteHitokoto，运行时异步拉取，取到才播，取不到用户无感
 //
 // 切换铁律：**只在当前句完整删除归零的那一刻才决定下一句**。
-// 一言什么时候回来都不打断正在打字/删除的句子，只是先塞进候场队列 buffer。
-// 每切一次句就补发一个请求（边播边预取），让 buffer 里尽量始终有「下一句」候着。
+// 一言什么时候回来都不打断正在打字/删除的句子，只是先存进当前实例的缓存。
+// 缓存未满时边播边预取，缓存满后只循环播放已成功获取的句子。
 //
 // 注意：.header-main 在 swup 容器（.main-inner>.main-inner-content 与 .vh-header>.main）之外，
 // 路由切换不会替换 .desc 节点，所以本模块由 Init.ts 以 only 守卫只初始化一次，此处无需考虑重复启动。
@@ -19,8 +19,8 @@ const HITOKOTO = (SITE_INFO as any).TypeWriteHitokoto ?? {};
 const HITOKOTO_API: string = HITOKOTO.api ?? 'https://v1.hitokoto.cn/?c=a&c=b&c=c&c=d&c=h&c=i&c=j&c=k&encode=text&charset=utf-8&min_length=8&max_length=20';
 // 单次请求超时（毫秒）
 const FETCH_TIMEOUT: number = HITOKOTO.timeout ?? 5000;
-// 候场队列上限
-const BUFFER_MAX: number = HITOKOTO.bufferMax ?? 2;
+// 当前 TypeWrite 实例的一言缓存上限
+const MAX_CACHE_SIZE = 10;
 // 单句最大长度，超长视为异常响应（如被劫持成 HTML）
 const MAX_SENTENCE_LEN: number = HITOKOTO.maxLength ?? 60;
 
@@ -32,19 +32,17 @@ export default () => {
   if (!Array.isArray(localList) || !localList.length) return writeDom.remove();
 
   let localIndex = 0;
-  // 已从一言取到、但还没轮播到的句子
-  const buffer: string[] = [];
+  // 当前页面实例已成功获取的一言，缓存满后只在这里循环
+  const cache: string[] = [];
+  let cacheIndex = 0;
   // 同一时刻只允许一个在途请求，避免切句频繁时堆积
   let fetching = false;
 
-  // 预取一句一言进候场队列。失败、超时、空响应、内容异常一律静默，交给本地列表兜底
+  // 预取一句一言进当前实例缓存。失败、超时、空响应、内容异常一律静默，交给本地列表兜底
   const prefetch = () => {
     // api 留空 = 配置里关掉了一言，此后只轮播本地列表
     if (!HITOKOTO_API) return;
-    if (fetching || buffer.length >= BUFFER_MAX) return;
-    // 页面在后台时不预取：打字机没人看，没必要持续打自己的 API。
-    // 回到前台时 buffer 可能是空的，那就先播本地列表，下一次切句会自动补上
-    if (document.hidden) return;
+    if (document.hidden || fetching || cache.length >= MAX_CACHE_SIZE) return;
     fetching = true;
     const abort = new AbortController();
     const timer = setTimeout(() => abort.abort(), FETCH_TIMEOUT);
@@ -54,7 +52,7 @@ export default () => {
         const sentence = text.trim();
         // 接口带 min_length/max_length 过滤，取不到合规句子时返回空属正常情况
         if (!sentence || sentence.length > MAX_SENTENCE_LEN || sentence.includes('<')) return;
-        if (buffer.length < BUFFER_MAX) buffer.push(sentence);
+        if (cache.length < MAX_CACHE_SIZE) cache.push(sentence);
       })
       .catch(() => { /* 网络失败/超时：静默，本地列表继续轮播 */ })
       .finally(() => {
@@ -63,10 +61,13 @@ export default () => {
       });
   };
 
-  // 取下一句：候场队列有货就播一言，没货就回落本地列表并继续循环
+  // 取下一句：有一言缓存就循环播放，缓存为空时回落本地列表
   const nextText = (): string => {
-    const cached = buffer.shift();
-    if (cached !== undefined) return cached;
+    if (cache.length) {
+      const text = cache[cacheIndex % cache.length];
+      cacheIndex = (cacheIndex + 1) % cache.length;
+      return text;
+    }
     const text = localList[localIndex];
     localIndex = (localIndex + 1) % localList.length;
     return text;

@@ -55,12 +55,25 @@ aside.vh-aside {
       display: none;
     }
 
-    &>h3 {
-      width: 100%;
-      font-size: 0.68rem;
-      font-weight: 400;
-      color: var(--vh-font-56);
-    }
+		&>h3 {
+			width: 100%;
+			font-size: 0.68rem;
+			font-weight: 400;
+			color: var(--vh-font-56);
+		}
+
+		&>.vh-aside-heading {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		.aside-more {
+			font-size: 0.72rem;
+			color: var(--vh-font-56);
+			&:hover { color: var(--vh-main-color); }
+		}
 
     // 用户信息
     &.user {
@@ -201,32 +214,41 @@ aside.vh-aside {
     &.tips {
       align-items: flex-start;
 
-      &>span {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0.288rem;
+      &>.vh-aside-heading>span {
         font-size: 1rem;
-
-        &>svg {
-          margin-bottom: 0.188rem;
-          color: var(--vh-main-color);
-          width: 1.18rem;
-          height: 1.18rem;
-          object-fit: contain;
-          animation: talking-tag-active 0.18s ease-in-out infinite;
-        }
       }
 
       &>.tips-content {
         font-size: 0.88rem;
+        width: 100%;
+        min-height: 1.5rem;
 
-        p {
+        .notice-state {
           padding: 0.28rem 0;
+          color: var(--vh-font-56);
         }
 
-        img {
-          max-width: 100%;
+        .notice-preview {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          width: 100%;
+          line-height: 1.5;
+
+          strong {
+            font-size: 0.88rem;
+            font-weight: 600;
+          }
+
+          span {
+            color: var(--vh-font-66);
+            font-size: 0.78rem;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+          }
         }
       }
     }

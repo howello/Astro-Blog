@@ -1,0 +1,22 @@
+---
+import { getRecommendArticleList } from "@/utils/getPostInfo";
+import SITE_CONFIG from "@/config";
+import Layout from "@/layouts/Layout/Layout.astro";
+import Archive from "@/components/Archive/Archive.astro";
+
+const { Description } = SITE_CONFIG;
+const recommended = getRecommendArticleList();
+const articleList = recommended.reduce((groups: { name: number; data: any[] }[], post) => {
+	const year = post.data.date.getFullYear();
+	const group = groups.find(item => item.name === year);
+	if (group) group.data.push(post.data);
+	else groups.push({ name: year, data: [post.data] });
+	return groups;
+}, []).sort((a, b) => b.name - a.name);
+---
+
+<Layout title="推荐文章" description={Description}>
+	<section class="vh-container">
+		<Archive articleList={articleList} />
+	</section>
+</Layout>

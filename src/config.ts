@@ -37,8 +37,6 @@ export default {
     api: 'https://hitokoto.wyantao.com/?c=a&c=b&c=c&c=d&c=h&c=i&c=j&c=k&encode=text&charset=utf-8&min_length=8&max_length=20',
     // 单次请求超时（毫秒）。超时即放弃这一句，不重试——下一轮切句会自然再发一个
     timeout: 5000,
-    // 候场队列上限。「边播边预取」正常只会攒 1 句，留 2 是给「请求比播放快」的余量
-    bufferMax: 2,
     // 单句最大长度（字符）。接口侧已有 max_length，这里再兜一道：
     // 网络劫持或错误页会返回一大坨 HTML，靠长度把它挡在外面
     maxLength: 60,

@@ -58,29 +58,17 @@ import "./Aside.less";
 		)
 	}
 
-	<!-- 公告块 -->
-	{
-		SITE_CONFIG.Tips && (
-			<section class="vh-aside-item tips">
-				<span>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						<path d="M3 9.662c2 2.338 2 4.338 0 6.338c3 .5 4.5 1 5 4c2 -3 6 -4 9 0c0 -3 1 -4 4 -4.004q -3 -2.995 0 -5.996c-3 0 -5 -2 -5 -5c-2 4 -5 3 -7.5 -1c-.5 3 -2.5 5 -5.5 5.662" />
-					</svg>
-					公告
-				</span>
-				<div class="tips-content">
-					<Fragment set:html={SITE_CONFIG.Tips} />
-				</div>
-			</section>
-		)
-	}
+		<!-- 公告块 -->
+		<section class="vh-aside-item tips" data-notices>
+			<div class="vh-aside-heading"><span>公告</span><a class="aside-more" href="/notice/">更多</a></div>
+			<div class="tips-content" data-notice-state>加载中...</div>
+		</section>
 
 	<!-- 分类块 -->
 	{
 		AsideShow.CategoriesShow && (
 			<section class="vh-aside-item cat">
-				<h3>分类</h3>
+				<div class="vh-aside-heading"><h3>分类</h3><a class="aside-more" href="/categories/">更多</a></div>
 				<div class="vh-aside-cat">
 					{categories
 						.sort((a: any, b: any) => b.count - a.count)
@@ -99,7 +87,7 @@ import "./Aside.less";
 	{
 		AsideShow.TagsShow && (
 			<section class="vh-aside-item tags">
-				<h3>热门标签</h3>
+				<div class="vh-aside-heading"><h3>热门标签</h3><a class="aside-more" href="/tag/">更多</a></div>
 				<div class="vh-aside-tags">
 					{tags.map(i => (
 						<a href={`/tag/${i[0]}`}>
@@ -117,7 +105,7 @@ import "./Aside.less";
 		{
 			recommendArticles.length && AsideShow.recommendArticleShow && (
 				<section class="vh-aside-item articles">
-					<h3>推荐文章</h3>
+					<div class="vh-aside-heading"><h3>推荐文章</h3><a class="aside-more" href="/recommend/">更多</a></div>
 					<div class="vh-aside-articles">
 						{recommendArticles.map((i, idx) => (
 							<a href={`/article/${i.id}`}>

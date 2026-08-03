@@ -25,10 +25,16 @@ const getTags = () => {
   return Object.entries(tagList).sort((a: any, b: any) => b[1] - a[1]);
 }
 
-// 获取推荐文章 (给文章添加 recommend: true 字段)
-const getRecommendArticles = () => {
+// 获取推荐文章（给文章添加 recommend: true 字段）
+const getRecommendArticleList = () => {
   const recommendList = posts.filter(i => i.data.recommend);
-  return (recommendList.length ? recommendList : posts.slice(0, 6)).map(i => ({ title: i.data.title, date: i.data.date, id: i.data.id }))
+  return (recommendList.length ? recommendList : posts.slice(0, 6))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+};
+
+// 获取推荐文章摘要（侧栏使用，保持既有数据契约）
+const getRecommendArticles = () => {
+  return getRecommendArticleList().map(i => ({ title: i.data.title, date: i.data.date, id: i.data.id }));
 };
 
 // 获取上一篇下一篇文章
@@ -40,4 +46,4 @@ const getPrevNextPosts = (id: string) => {
 }
 
 
-export { getCategories, getTags, getRecommendArticles, getCountInfo, getPrevNextPosts };
+export { getCategories, getTags, getRecommendArticles, getRecommendArticleList, getCountInfo, getPrevNextPosts };
