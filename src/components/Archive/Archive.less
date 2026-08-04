@@ -31,6 +31,49 @@ section.vh-archive-main {
             width: auto;
             min-width: max-content;
           }
+
+          // 标签总览页：标题行最右侧的标签筛选框
+          &>.tag-search {
+            flex-shrink: 0;
+            box-sizing: border-box;
+            margin-left: auto;
+            padding: 0 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.38rem;
+            width: 10rem;
+            height: 2.125rem;
+            color: var(--vh-font-56);
+            border-radius: 0.66rem;
+            background-color: var(--vh-font-6);
+            transition: background .18s;
+
+            &:focus-within {
+              background-color: var(--vh-font-16);
+            }
+
+            &>svg {
+              flex-shrink: 0;
+              width: 1.125rem;
+              height: 1.125rem;
+            }
+
+            &>input {
+              flex: 1;
+              min-width: 0;
+              height: 100%;
+              border: none;
+              outline: none;
+              color: var(--vh-font-88);
+              font-size: 0.875rem;
+              font-weight: 400;
+              background-color: transparent;
+
+              &::placeholder {
+                color: var(--vh-font-56);
+              }
+            }
+          }
         }
 
         &:not(.title) {
@@ -133,6 +176,23 @@ section.vh-archive-main {
         }
       }
 
+      // 标签总览页：被筛掉的标签行，列表行本身是 display:flex，HTML 的 hidden 默认样式压不住
+      &>a[hidden] {
+        display: none;
+      }
+
+      // 标签总览页：筛选无结果时的占位。用 div 而非 p/a，避开上面的列表行样式
+      &>.tag-empty {
+        padding: 1.5rem 0;
+        color: var(--vh-font-56);
+        font-size: 0.875rem;
+        text-align: center;
+
+        &[hidden] {
+          display: none;
+        }
+      }
+
       // 公告总览页：固定圆点与时间列，避免 flex 把时间压窄并把圆点推到最右侧
       &>[data-notice-toggle]>i {
         flex: 0 0 2.5rem;
@@ -223,6 +283,18 @@ section.vh-archive-main {
           }
 
           &>span {
+            font-size: 0.8rem;
+          }
+        }
+
+        // 标签总览页：窄屏收缩筛选框，给「全部标签」与计数留出宽度
+        &>p.title>.tag-search {
+          gap: 0.28rem;
+          padding: 0 0.56rem;
+          width: 7.5rem;
+          height: 1.925rem;
+
+          &>input {
             font-size: 0.8rem;
           }
         }
