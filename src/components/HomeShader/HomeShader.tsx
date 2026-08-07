@@ -77,13 +77,18 @@ const HomeShader: FC = () => {
 	const config: any = (SITE_CONFIG as any).HomeShader || {};
 	const reduced = useReducedMotion();
 
-	// 着色器确实能画出来之后才通知 MainHeader 淡出静态图（见 MainHeader.less 的 .shader-ready）
+	// 着色器确实能画出来之后才通知 MainHeader：给 .header-main 加 .shader-ready（静态图淡出），
+	// 同时给 .shader-bg 加 .shader-ready（着色器淡入）——两者 0.58s 交叉淡化，见 MainHeader.less
 	useEffect(() => {
 		if (config.enable === false || !canUseWebGL2()) return;
 		const box = document.querySelector(".header-main");
+		const bg = document.querySelector(".header-main > .shader-bg");
 		if (!box) return;
 		// 留一点时间给 WebGL 初始化与首帧绘制，避免静态图先没了着色器还没上来
-		const timer = window.setTimeout(() => box.classList.add("shader-ready"), 200);
+		const timer = window.setTimeout(() => {
+			box.classList.add("shader-ready");
+			bg?.classList.add("shader-ready");
+		}, 200);
 		return () => window.clearTimeout(timer);
 	}, [config.enable]);
 

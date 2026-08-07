@@ -21,21 +21,31 @@
     z-index: -1;
   }
 
-  // 开启动态着色器背景时，静态图仍然是**底层兜底**：
+  // 只有启动动态着色器背景时，静态图仍然是**底层兜底**：
   // 岛是 client 渲染的，SSR 只吐出一个空 div，水合完成前（慢网可达数秒）以及
-  // WebGL2 不可用 / JS 加载失败时着色器永远画不出来，这时候必须还有背景，否则白字压在浅灰底上没法读。
-  // 只有着色器真的就绪（HomeShader.tsx 给 .header-main 加上 .shader-ready）后才淡出，避免两层背景长期叠加
+  // WebGL2 不可用 / JS 加载失败时着色器永远画不出来，这时候必须还有静态背景，否则白字压在浅色底上没法读。
+  // 只有着色器真的就绪（HomeShader.tsx 给 .header-main 加上 .shader-ready）后才淡出，避免两层背景长期叠加。
   &.has-shader.shader-ready::before {
     opacity: 0;
   }
 
-  // 动态着色器背景层：铺满 Banner，位于头像/文字之下，不拦截鼠标事件
+  // 动态着色器背景层：铺满 Banner，位于头像/文字之下，不拦截鼠标事件。
+  // 默认 opacity: 0 隐藏（等水合/首帧），.shader-ready 时淡入 **底下的静态图同步淡出（0.58s）**，
+  // 形成交叉淡化而非生硬切换；若着色器永远画不出来，.shader-ready 不触发，静态图保持显示做兜底
   &>.shader-bg {
     position: absolute;
     inset: 0;
     overflow: hidden;
     pointer-events: none;
     z-index: -1;
+    opacity: 0;
+    transition: opacity 1.58s ease-in-out;
+
+    // 着色器就绪（HomeShader.tsx 给 .header-main 加 .shader-ready）后淡入，
+    // 与静态图 0.58s 淡出交叉淡化，避免「静态图先没了、着色器还没上来」的生硬切换
+    &.shader-ready {
+      opacity: 1;
+    }
 
     // ShaderMount 渲染的是 div > canvas，两层都要撑满
     &>div,
