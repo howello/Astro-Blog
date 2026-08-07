@@ -27,6 +27,7 @@ const { Description } = SITE_CONFIG;
 const isFirstPage = !page_data.url.prev;
 // 博客列表组件
 import ArticleCard from "@/components/ArticleCard/ArticleCard.astro";
+import Svg from "@/components/Svg/Svg.astro";
 // 公共 Layout
 import Layout from "@/layouts/Layout/Layout.astro";
 // 分页组件
@@ -38,7 +39,11 @@ const currentPage = page_data.url.current.replace("/", "");
 	<!-- data-vh-home：首页标记（只有第 1 页才输出）。它位于 swup 容器 .main-inner-content 内部，
 	     每次导航都会被替换，是客户端判断「当前是否首页」唯一可靠的依据（见 src/scripts/HomeHero.ts） -->
 	<section class="article-list-main" data-vh-home={isFirstPage ? "" : undefined}>
-		<section class="article-list">
+		<div class="layout-switch" data-list-layout>
+			<button type="button" class="layout-btn" data-layout="card" aria-pressed="true" title="卡片布局"><Svg src="Layout_grid" /></button>
+			<button type="button" class="layout-btn" data-layout="list" aria-pressed="false" title="列表布局"><Svg src="Layout_list" /></button>
+		</div>
+		<section class="article-list view-card">
 			<!-- 文章列表 -->
 			{data.map((post, index) => <ArticleCard post={post} index={index} />)}
 			<!-- 分页 -->

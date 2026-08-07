@@ -5,6 +5,42 @@
   width: 100%;
   height: max-content;
 
+  &>.layout-switch {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.375rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+
+    &>.layout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      width: 2.3rem;
+      height: 2.3rem;
+      padding: 0;
+      border: solid 1px #eee;
+      border-radius: 0.66rem;
+      background-color: #fff;
+      color: var(--vh-font-66);
+      cursor: pointer;
+      transition: color 0.18s, border-color 0.18s, background-color 0.18s;
+
+      &:hover {
+        color: var(--vh-main-color);
+        border-color: var(--vh-main-color);
+      }
+
+      &.active {
+        color: #fff;
+        background-color: var(--vh-main-color);
+        border-color: var(--vh-main-color);
+      }
+    }
+  }
+
   &>section.article-list {
     position: relative;
     display: grid;
@@ -91,146 +127,237 @@
         }
       }
 
-      &>header {
+      &>.vh-article-info {
         box-sizing: border-box;
-        padding: 0.88rem 1.166rem;
         display: flex;
         flex-direction: column;
-        gap: 0.66rem;
+        flex: 1;
         width: 100%;
-        height: max-content;
+        min-width: 0;
 
-        &>h3 {
+        &>header {
+          box-sizing: border-box;
+          padding: 0.88rem 1.166rem;
           display: flex;
-          align-self: center;
-          justify-content: space-between;
+          flex-direction: column;
+          gap: 0.66rem;
           width: 100%;
           height: max-content;
 
-          &>.vh-article-cat {
-            flex-shrink: 0;
-            box-sizing: border-box;
-            width: max-content;
-            font-size: 0.875rem;
-            font-weight: 700;
-            /* 默认渐变色起始 */
-            --gradient-color-1: #a32cc4;
-            /* 默认渐变色中间 */
-            --gradient-color-2: #b65fcf;
-            /* 默认渐变色结束 */
-            --gradient-color-3: #e39ff6;
-            background: linear-gradient(118deg, var(--gradient-color-1), var(--gradient-color-2) 26%, var(--gradient-color-3));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
+          &>h3 {
+            display: flex;
+            align-self: center;
+            justify-content: space-between;
+            width: 100%;
+            height: max-content;
 
-            &.vh-cat-Code {
+            &>.vh-article-cat {
+              flex-shrink: 0;
+              box-sizing: border-box;
+              width: max-content;
+              font-size: 0.875rem;
+              font-weight: 700;
               /* 默认渐变色起始 */
-              --gradient-color-1: #f48600;
+              --gradient-color-1: #a32cc4;
               /* 默认渐变色中间 */
-              --gradient-color-2: #ffa12e;
+              --gradient-color-2: #b65fcf;
               /* 默认渐变色结束 */
-              --gradient-color-3: #ffe9c9;
+              --gradient-color-3: #e39ff6;
+              background: linear-gradient(118deg, var(--gradient-color-1), var(--gradient-color-2) 26%, var(--gradient-color-3));
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              color: transparent;
+
+              &.vh-cat-Code {
+                /* 默认渐变色起始 */
+                --gradient-color-1: #f48600;
+                /* 默认渐变色中间 */
+                --gradient-color-2: #ffa12e;
+                /* 默认渐变色结束 */
+                --gradient-color-3: #ffe9c9;
+              }
+
+              &.vh-cat-Daily {
+                /* 默认渐变色起始 */
+                --gradient-color-1: #6270ee;
+                /* 默认渐变色中间 */
+                --gradient-color-2: #2b90d9;
+                /* 默认渐变色结束 */
+                --gradient-color-3: #37dede;
+              }
+
+              &.vh-cat-Software {
+                /* 默认渐变色起始 */
+                --gradient-color-1: #006633;
+                /* 默认渐变色中间 */
+                --gradient-color-2: #00cc66;
+                /* 默认渐变色结束 */
+                --gradient-color-3: #66ff99;
+              }
+
+              &.vh-cat-Share {
+                /* 默认渐变色起始 */
+                --gradient-color-1: rgb(240, 45, 133);
+                /* 默认渐变色中间 */
+                --gradient-color-2: #f95ba5;
+                /* 默认渐变色结束 */
+                --gradient-color-3: #f4bdd0;
+              }
             }
 
-            &.vh-cat-Daily {
-              /* 默认渐变色起始 */
-              --gradient-color-1: #6270ee;
-              /* 默认渐变色中间 */
-              --gradient-color-2: #2b90d9;
-              /* 默认渐变色结束 */
-              --gradient-color-3: #37dede;
-            }
-
-            &.vh-cat-Software {
-              /* 默认渐变色起始 */
-              --gradient-color-1: #006633;
-              /* 默认渐变色中间 */
-              --gradient-color-2: #00cc66;
-              /* 默认渐变色结束 */
-              --gradient-color-3: #66ff99;
-            }
-
-            &.vh-cat-Share {
-              /* 默认渐变色起始 */
-              --gradient-color-1: rgb(240, 45, 133);
-              /* 默认渐变色中间 */
-              --gradient-color-2: #f95ba5;
-              /* 默认渐变色结束 */
-              --gradient-color-3: #f4bdd0;
+            &>time {
+              box-sizing: border-box;
+              margin-top: auto;
+              font-size: 0.805rem;
+              font-weight: 400;
+              color: var(--vh-font-color);
+              width: max-content;
             }
           }
 
-          &>time {
+          &>.title {
             box-sizing: border-box;
-            margin-top: auto;
-            font-size: 0.805rem;
-            font-weight: 400;
-            color: var(--vh-font-color);
-            width: max-content;
+            width: 100%;
+            height: max-content;
+            overflow: hidden;
+
+            &>a {
+              font-size: 1.06rem;
+              font-weight: 600;
+              transition: color 0.18s;
+
+              &:hover {
+                color: var(--vh-main-color);
+              }
+            }
           }
         }
 
-        &>.title {
+        &>.vh-article-excerpt {
           box-sizing: border-box;
+          padding: 0 1.166rem;
+          width: 100%;
+          height: max-content;
+          color: var(--vh-font-66);
+          font-size: 0.805rem;
+          font-weight: 400;
+          letter-spacing: 0.88px;
+          line-height: 1.28rem;
+        }
+
+
+        &>.vh-article-taglist {
+          margin-top: auto;
+          box-sizing: border-box;
+          padding: 0.66rem 1.166rem 1rem;
           width: 100%;
           height: max-content;
           overflow: hidden;
 
           &>a {
-            font-size: 1.06rem;
-            font-weight: 600;
+            box-sizing: border-box;
+            margin-right: 0.88rem;
+            color: var(--vh-font);
+            font-size: 0.688rem;
+            font-weight: 400;
             transition: color 0.18s;
 
             &:hover {
               color: var(--vh-main-color);
             }
+
+            &::before {
+              content: "#";
+            }
+
+            &:nth-last-of-type(1) {
+              margin-right: 0;
+            }
           }
         }
       }
+    }
 
-      &>.vh-article-excerpt {
-        box-sizing: border-box;
-        padding: 0 1.166rem;
-        width: 100%;
-        height: max-content;
-        color: var(--vh-font-66);
-        font-size: 0.805rem;
-        font-weight: 400;
-        letter-spacing: 0.88px;
-        line-height: 1.28rem;
-      }
+    &.view-list {
+      grid-template-columns: 1fr;
+      gap: 1rem;
 
+      &>.vh-article-item {
+        flex-direction: row;
+        align-items: stretch;
 
-      &>.vh-article-taglist {
-        margin-top: auto;
-        box-sizing: border-box;
-        padding: 0.66rem 1.166rem 1rem;
-        width: 100%;
-        height: max-content;
-        overflow: hidden;
+        &>.vh-article-banner {
+          width: 220px;
+          max-width: 38%;
+          height: auto;
+          min-height: 10rem;
+          flex-shrink: 0;
+        }
 
-        &>a {
-          box-sizing: border-box;
-          margin-right: 0.88rem;
-          color: var(--vh-font);
-          font-size: 0.688rem;
-          font-weight: 400;
-          transition: color 0.18s;
+        &>.vh-article-info {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          grid-template-areas:
+            "title cat"
+            "excerpt excerpt"
+            "taglist time";
+          align-content: start;
+          gap: 0.66rem 0.88rem;
+          padding: 0.88rem 1.166rem;
 
-          &:hover {
-            color: var(--vh-main-color);
+          &>header {
+            display: contents;
+            &>h3 {
+              display: contents;
+            }
           }
 
-          &::before {
-            content: "#";
+          &>.title {
+            grid-area: title;
+            margin: 0;
           }
 
-          &:nth-last-of-type(1) {
-            margin-right: 0;
+          &>header>h3>.vh-article-cat {
+            grid-area: cat;
+            justify-self: end;
+          }
+
+          &>.vh-article-excerpt {
+            grid-area: excerpt;
+            padding: 0;
+          }
+
+          &>.vh-article-taglist {
+            grid-area: taglist;
+            padding: 0;
+            margin-top: 0;
+            align-self: end;
+          }
+
+          &>header>h3>time {
+            grid-area: time;
+            margin: 0;
+            justify-self: end;
           }
         }
+      }
+    }
+
+    &.vh-layout-switching {
+      &>.vh-article-item {
+        animation: vhLayoutFadeIn 0.3s ease;
+      }
+    }
+
+    @keyframes vhLayoutFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+      }
+      to {
+        opacity: 1;
+        transform: none;
       }
     }
 
@@ -254,6 +381,17 @@
   .article-list-main {
     &>section.article-list {
       grid-template-columns: repeat(1, 1fr);
+    }
+
+    &>section.article-list.view-list {
+      &>.vh-article-item > .vh-article-banner {
+        width: 34%;
+        max-width: 34%;
+      }
+    }
+
+    &>.layout-switch {
+      display: none;
     }
   }
 }
