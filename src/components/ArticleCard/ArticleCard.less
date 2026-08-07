@@ -298,11 +298,14 @@
         &>.vh-article-info {
           display: grid;
           grid-template-columns: 1fr auto;
+          grid-template-rows: auto auto 1fr;
           grid-template-areas:
             "title cat"
             "excerpt excerpt"
             "taglist time";
-          align-content: start;
+          /* 第三行 1fr：封面高于信息区时，taglist/time 行贴到 item 底部（配合各元素 align-self: end），
+             前两行 auto 保持顶部紧凑不被拉开 */
+          align-content: stretch;
           gap: 0.66rem 0.88rem;
           padding: 0.88rem 1.166rem;
 
@@ -339,6 +342,7 @@
             grid-area: time;
             margin: 0;
             justify-self: end;
+            align-self: end;
           }
         }
       }
