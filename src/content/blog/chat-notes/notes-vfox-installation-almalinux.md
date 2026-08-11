@@ -1,5 +1,5 @@
 ---
-title: vfox 管理 Java/Node.js/Maven 版本｜环境配置
+title: vfox 管理开发环境版本｜环境配置
 categories: 环境配置
 tags:
   - AlmaLinux
