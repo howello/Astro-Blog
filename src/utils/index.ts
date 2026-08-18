@@ -8,8 +8,13 @@ import 'dayjs/locale/zh-cn'
 dayjs.locale('zh-cn');
 // 获取文章的描述
 const getDescription = (post: any, num: number = 150) => (post.rendered ? post.rendered.html.replace(/<[^>]+>/g, "").replace(/\s+/g, "") : post.body.replace(/\n/g, "").replace(/#/g, "")).slice(0, num) || '暂无简介'
+const SITE_TIMEZONE = 'Asia/Shanghai';
+
 //处理时间
-const fmtTime = (time: any, fmt: string = 'MMMM D, YYYY') => dayjs(time).utc().format(fmt)
+const fmtTime = (
+  time: any,
+  fmt: string = 'MMMM D, YYYY'
+) => dayjs(time).tz(SITE_TIMEZONE).format(fmt);
 // 处理日期
 const fmtDate = (time: string | Date, hours_status = true) => {
   const now = dayjs();
