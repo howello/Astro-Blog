@@ -1,6 +1,6 @@
-import SITE_CONFIG from '@/config';
 import escapeHtml from '@/utils/escapeHtml';
 import { fetchJson } from '@/utils/blogApi';
+import { sanitizeNotice } from '@/utils/sanitizeNotice';
 
 interface Notice {
   noticeId: number;
@@ -36,7 +36,7 @@ const renderCount = (el: Element | null, text: string) => {
 const renderItem = (notice: Notice): string => {
   const safeTitle = escapeHtml(notice.noticeTitle);
   const safeTime = escapeHtml(fmtTime(notice.createTime));
-  // 公告正文是后台可信富文本，仅在点击展开时以原始 HTML 注入展开区
+  // 正文展开时仍需净化，不能将后台来源当作内容安全保证。
   return `<a href="javascript:;" data-notice-toggle data-notice-id="${notice.noticeId}">
     <span class="vh-ellipsis">${safeTitle}</span>
     <i></i>
@@ -107,7 +107,7 @@ export default async function initNotices() {
           ev.preventDefault();
           const notice = notices.find((n) => String(n.noticeId) === String(toggle.dataset.noticeId));
           if (content.hidden && notice && !content.dataset.filled) {
-            content.innerHTML = notice.noticeContent || '';
+            content.innerHTML = sanitizeNotice(notice.noticeContent || '');
             content.dataset.filled = 'true';
           }
           content.hidden = !content.hidden;

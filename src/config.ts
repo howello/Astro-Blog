@@ -171,7 +171,7 @@ export default {
     // 建议使用 https://tabler.io/icons 直接下载 SVG
     // 示例：{ text: 'Github', link: 'https://github.com/<你的用户名>', icon: 'WebSite_github' },
     //   { text: 'Github', link: 'https://github.com/howello', icon: 'WebSite_github' }
-  ],
+  ] as Array<{ text: string; link: string; icon: string }>,
   // 侧边栏展示
   AsideShow: {
     // 是否展示个人网站
@@ -248,6 +248,8 @@ export default {
   // Google 广告
   GoogleAds: {
     ad_Client: '', //ca-pub-xxxxxx
+    asideAD_Slot: '',
+    articleAD_Slot: '',
     // 侧边栏广告(不填不开启)
     // asideAD_Slot: `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxx" data-ad-slot="xxxxxx" data-ad-format="auto" data-full-width-responsive="true"></ins>`,
     // 文章页广告(不填不开启)
@@ -255,6 +257,8 @@ export default {
   },
   // 文章内赞赏码
   Reward: {
+    AliPay: '',
+    WeChat: '',
     // 支付宝收款码
     // AliPay: '/assets/images/alipay.webp',
     // 微信收款码

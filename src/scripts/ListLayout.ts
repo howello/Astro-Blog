@@ -48,7 +48,8 @@ export default function initListLayout() {
 
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const mode = VALID_LAYOUTS.includes(btn.dataset.layout ?? '') ? btn.dataset.layout : 'card';
+      const candidate = btn.dataset.layout ?? 'card';
+      const mode = VALID_LAYOUTS.includes(candidate) ? candidate : 'card';
       try {
         localStorage.setItem(STORAGE_KEY, mode);
       } catch {
