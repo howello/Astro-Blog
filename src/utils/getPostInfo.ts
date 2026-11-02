@@ -2,7 +2,7 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 // 获取文章分类
 const getCategories = () => {
-  const categoriesList = posts.reduce((acc: any, i: any) => {
+  const categoriesList = posts.reduce<Record<string, number>>((acc, i) => {
     acc[i.data.categories] = (acc[i.data.categories] || 0) + 1;
     return acc;
   }, {});
@@ -16,8 +16,8 @@ const getCountInfo = () => {
 
 // 获取文章标签
 const getTags = () => {
-  const tagList = posts.reduce((acc: any, i: any) => {
-    (i.data.tags || []).forEach((tag: string) => {
+  const tagList = posts.reduce<Record<string, number>>((acc, i) => {
+    (i.data.tags || []).forEach((tag) => {
       acc[tag] = (acc[tag] || 0) + 1;
     });
     return acc;

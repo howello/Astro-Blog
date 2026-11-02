@@ -9,7 +9,9 @@
     "astro": "astro",
     "newpost": "node ./script/newpost.js",
     "offdev": "astro preferences disable devToolbar",
-    "ondev": "astro preferences enable devToolbar"
+    "ondev": "astro preferences enable devToolbar",
+    "test": "node --test tests/*.test.cjs",
+    "type-check": "astro check --minimumFailingSeverity error"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",
@@ -24,6 +26,7 @@
     "aplayer": "^1.10.1",
     "astro": "^5.13.10",
     "astro-compressor": "^1.1.2",
+    "dompurify": "3.4.17",
     "marked": "^17.0.6",
     "overlayscrollbars": "^2.12.0",
     "react": "^19.2.8",
@@ -32,11 +35,13 @@
     "vh-plugin": "^1.2.2"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.12",
     "@playform/compress": "^0.2.0",
     "@types/dplayer": "^1.25.5",
     "@types/nprogress": "^0.2.3",
     "cheerio": "^1.1.2",
     "dayjs": "^1.11.18",
+    "jsdom": "30.1.3",
     "less": "^4.4.1",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
