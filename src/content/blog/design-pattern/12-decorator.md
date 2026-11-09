@@ -121,7 +121,7 @@ public static void main(String[] args) {
 }
 ```
 
-![image-20220614164510512](https://img.wyantao.com/img/202206141645728.png)
+![image-20220614164510512](https://img.wyantao.com/img/2022/06/14/202206141645728.png)
 
 ## 总结
 
