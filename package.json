@@ -10,7 +10,7 @@
     "newpost": "node ./script/newpost.js",
     "offdev": "astro preferences disable devToolbar",
     "ondev": "astro preferences enable devToolbar",
-    "test": "node --test tests/*.test.cjs",
+    "test": "node --test",
     "type-check": "astro check --minimumFailingSeverity error"
   },
   "dependencies": {
